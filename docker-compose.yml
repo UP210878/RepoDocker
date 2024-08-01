@@ -12,7 +12,7 @@ services:
       - ./frontend/src:/app/src
     # Variable de Entorno
     environment:
-      VITE_API_URL: http://localhost:3000
+      VITE_API_URL: http://143.198.244.34:3000
 
   # Backend
   api:
