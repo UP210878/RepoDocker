@@ -3,12 +3,18 @@ version: "3.8"
 services:
   app:
     build: ./frontend
+    # Puerto HOST:CONTENEDOR
     ports:
       - 80:5173
+
+    # Volumen inombrable, sincronizando frontend con app
     volumes:
       - ./frontend/src:/app/src
+    # Variable de Entorno
     environment:
       VITE_API_URL: http://localhost:3000
+
+  # Backend
   api:
     build: ./backend
     ports:
@@ -19,16 +25,16 @@ services:
       - ./backend/app:/app/app
     depends_on:
       - db
-  api-tests:
-    image: holamundo-api
-    environment:
-      DB_URL: mongodb://db/gamifytest
-    volumes:
-      - ./backend/app:/app/app
-      - ./backend/tests:/app/tests
-    depends_on:
-      - db
-    command: npm test
+  # api-tests:
+  #   image: holamundo-api
+  #   environment:
+  #     DB_URL: mongodb://db/gamifytest
+  #   volumes:
+  #     - ./backend/app:/app/app
+  #     - ./backend/tests:/app/tests
+  #   depends_on:
+  #     - db
+  #   command: npm test
   db:
     image: mongo:5.0.19-focal
     ports:
